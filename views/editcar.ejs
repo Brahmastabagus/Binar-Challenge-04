@@ -1,0 +1,46 @@
+<%- include("partials/Header.ejs") %>
+  <div class="content m-3 container">
+    <!-- Breadcrumb -->
+    <nav
+      style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+      aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="text-decoration-none" href="/dashboard">Cars</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a class="text-decoration-none" href="/dashboard">List Car</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Update Car Information</li>
+      </ol>
+    </nav>
+
+    <!-- Form edit -->
+    <h1 class="text-title">Update Car Information</h1>
+    <div class="form shadow">
+      <form class="" action="/api/update/<%= data.id %>" method="post">
+        <div class="row mb-3">
+          <label for="nama" class="col-sm-3 col-form-label">Nama</label>
+          <div class="col-sm-9"><input type="text" class="form-control" id="nama" placeholder="Avanza" value="<%= data.name %>" name="name"></div>
+        </div>
+        <div class="row mb-3">
+          <label for="sewa" class="col-sm-3 col-form-label">Sewa Per Hari</label>
+          <div class="col-sm-9"><input type="text" class="form-control" id="sewa" placeholder="Rp. 0,-" name="rent" value="<%= data.rent %>">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="ukuran" class="col-sm-3 col-form-label">Ukuran</label>
+          <div class="col-sm-9">
+            <select class="form-select" aria-label="Default select example" name="size">
+              <!-- <option selected>Open this select menu</option> -->
+              <option <%= data.size === "small" ? "selected" : "" %> value="small">Small</option>
+              <option <%= data.size === "medium" ? "selected" : "" %> value="medium">Medium</option>
+              <option <%= data.size === "large" ? "selected" : "" %> value="large">Large</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="foto" class="col-sm-3 col-form-label">Foto</label>
+          <div class="col-sm-9"><input class="form-control" type="text" id="foto" name="image" value="<%= data.image %>"></div>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <%- include("partials/Footer.ejs") %>
