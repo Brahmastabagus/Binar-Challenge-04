@@ -38,7 +38,9 @@
     </div>
 
     <!-- Information -->
-    <h1 class="text-title__2 mt-3"><%= size === "all" ? "Menampilkan semua car": `Menampilkan car ${size}(${data.length})` %></h1>
+    <h1 class="inform text-title__2 mt-3">
+      <!-- <%= size === "all" ? "Menampilkan semua car": `Menampilkan car ${size}(${data.length})` %> -->
+    </h1>
     <h1 class="text-title mt-1 d-flex justify-content-center align-items-center h-50 <%= data.length === 0 ? "" : "d-none" %>"><%= data.length === 0 ? "Data tidak ditemukan" : "" %></h1>
 
     <!-- Mapping cars -->
@@ -128,5 +130,20 @@
         angker.href = `/api/delete/${id}`
       })
     })
+
+    const inform = document.querySelector(".inform")
+    const urlParams = new URLSearchParams(location.search)
+
+    let urlSize = urlParams.get("size")
+    let urlName = urlParams.get("name")
+
+    let text = "Menampilkan semua car"
+    if (urlSize) {
+      text = `Menampilkan semua car ${urlSize}(<%= data.length %>)`
+    } else if (urlName) {
+      text = `Menampilkan semua car "${urlName}"(<%= data.length %>)`
+    }
+
+    inform.innerHTML = text
   </script>
   <%- include("partials/Footer.ejs") %>
