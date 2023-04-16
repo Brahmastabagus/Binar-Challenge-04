@@ -14,7 +14,7 @@
     <!-- Form add -->
     <h1 class="text-title">Add New Car</h1>
     <div class="form shadow">
-      <form class="" action="/api/post" method="post">
+      <form class="" action="/api/post" method="post" enctype="multipart/form-data">
         <div class="row mb-3">
           <label for="nama" class="col-sm-3 col-form-label">Nama</label>
           <div class="col-sm-9"><input type="text" class="form-control" id="nama" placeholder="Avanza" name="name"></div>
@@ -37,7 +37,7 @@
         </div>
         <div class="row mb-3">
           <label for="foto" class="col-sm-3 col-form-label">Foto</label>
-          <div class="col-sm-9"><input class="form-control" type="text" id="foto" name="image"></div>
+          <div class="col-sm-9"><input class="form-control" type="file" id="foto" name="image"></div>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>

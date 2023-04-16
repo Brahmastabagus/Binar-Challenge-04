@@ -2,6 +2,10 @@
 const { Op } = require('sequelize');
 const { cars } = require('../models')
 
+// app.use(flash())
+
+const imagekit = require('../lib/imagekit')
+
 // Get all cars
 const getCar = async (req, res) => {
   try {
@@ -39,10 +43,15 @@ const getCar = async (req, res) => {
       data = await cars.findAll({ order: [["id", "Asc"]], })
     }
 
+    // console.log(req.flash());
+
+    // req.flash('message', 'Data dengan id ${id} berhasil dirubah');
+
     res.render("index", {
       title: "Dashboard Cars",
       data,
-      size
+      size,
+      message: req.flash('message')
     })
   } catch (error) {
     res.status(400).json({
@@ -73,7 +82,18 @@ const getIdCar = async (req, res) => {
 // Post car
 const postCar = async (req, res) => {
   try {
-    await cars.create({ ...req.body })
+    const file = req.file
+
+    // get extension file
+    const split = file.originalname.split('.');
+    const ext = split[split.length - 1];
+
+    // proses upload file ke imagekit
+    const img = await imagekit.upload({
+      file: file.buffer, // required
+      fileName: `IMG-${Date.now()}.${ext}`,
+    })
+    await cars.create({ ...req.body, image: img.url })
 
     res.redirect("/dashboard")
   } catch (error) {
@@ -87,16 +107,28 @@ const postCar = async (req, res) => {
 // Update car by ID
 const updateCar = async (req, res) => {
   try {
-    const { ...body } = req.body
-    const data = { ...body }
-    const id = req.params.id
+    const file = req.file
 
-    await cars.update(data, {
+    // get extension file
+    const split = file.originalname.split('.');
+    const ext = split[split.length - 1];
+
+    // proses upload file ke imagekit
+    const img = await imagekit.upload({
+      file: file.buffer, // required
+      fileName: `IMG-${Date.now()}.${ext}`,
+    })
+
+    const id = req.params.id
+    // req.flash('message', 'Data dengan id ${id} berhasil dirubah');
+    
+    await cars.update({ ...req.body, image: img.url }, {
       where: {
         id
       }
     })
-
+    
+    req.flash('message', `Data dengan id ${id} berhasil dirubah`);
     res.redirect("/dashboard")
   } catch (err) {
     res.status(400).json({
@@ -125,6 +157,8 @@ const deleteCar = async (req, res) => {
     })
   }
 }
+
+// app.use(flash())
 
 module.exports = {
   getCar,

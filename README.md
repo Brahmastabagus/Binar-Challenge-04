@@ -1,7 +1,5 @@
-
 # Binar Car Rental 📝  
-Import your existing Readme using the import button on the top right corner of the navbar, 
-or create a new Readme from scratch by typing in the editor.  
+Admin dashboard website for Binar Car Rental. This website was created using Express JS and EJS as the view engine.
 
 ## Get Started 🚀  
 ```sh  
@@ -9,4 +7,4 @@ or create a new Readme from scratch by typing in the editor.
 ```    
  
 ## ERD  
-![App Screenshot](./public/Binar-Car.png)  
+![ERD cars](./public/Binar-Car.png)  

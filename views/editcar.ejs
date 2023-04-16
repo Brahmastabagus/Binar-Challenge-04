@@ -14,7 +14,7 @@
     <!-- Form edit -->
     <h1 class="text-title">Update Car Information</h1>
     <div class="form shadow">
-      <form class="" action="/api/update/<%= data.id %>" method="post">
+      <form class="" action="/api/update/<%= data.id %>" method="post" enctype="multipart/form-data">
         <div class="row mb-3">
           <label for="nama" class="col-sm-3 col-form-label">Nama</label>
           <div class="col-sm-9"><input type="text" class="form-control" id="nama" placeholder="Avanza" value="<%= data.name %>" name="name"></div>
@@ -37,7 +37,7 @@
         </div>
         <div class="row mb-3">
           <label for="foto" class="col-sm-3 col-form-label">Foto</label>
-          <div class="col-sm-9"><input class="form-control" type="text" id="foto" name="image" value="<%= data.image %>"></div>
+          <div class="col-sm-9"><input class="form-control" type="file" id="foto" name="image" value="<%= data.image %>"></div>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>
