@@ -95,6 +95,7 @@ const postCar = async (req, res) => {
     })
     await cars.create({ ...req.body, image: img.url })
 
+    req.flash('message', `Data berhasil ditambahkan`);
     res.redirect("/dashboard")
   } catch (error) {
     res.status(400).json({
