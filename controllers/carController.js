@@ -150,6 +150,7 @@ const deleteCar = async (req, res) => {
       }
     })
 
+    req.flash('message', `Data dengan id ${id} berhasil dihapus`);
     res.redirect("/dashboard")
   } catch (err) {
     res.status(400).json({
